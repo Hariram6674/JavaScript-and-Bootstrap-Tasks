@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <title>Reverse number</title>
+</head>
+<body>
+    <center><div class="container" style="justify-content:center; align-content:center;">
+        <form action="#" class="" id="">
+            <div class="form-group">
+                <label for="Number">Enter Number to be Reversed</label>
+                <input type="number" name="" id="Number" placeholder="Write number to be reversed" style="width:300px;">
+            </div>
+
+            <div class="form-group">
+                <label for="answer">Answer</label>
+                <input type="number" name="" id="answer" placeholder="answer will be shown after clicking submit button" style="width:400px;">
+            </div>
+            <button class="btn btn-primary" type="submit" id="btn1">Submit</button>
+        </form>
+    </div>
+</center>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $("#btn1").on("click",()=>{
+           const inp1 = $("#Number").val();
+           let answer = reverseNum(inp1);
+           $("#answer").val(answer);
+        })
+
+        function reverseNum(num){
+            let strnum = num.toString();
+            let array = strnum.split('');
+            let reversed = array.reverse();
+            let newnum = reversed.join('');
+            let newer = parseInt(newnum);
+            return newer
+        }
+    </script>
+</body>
+</html>

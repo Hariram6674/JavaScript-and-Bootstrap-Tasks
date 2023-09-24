@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button class="date btn-primary" type="submit">Show Date</button>
+    <p class="dateAns"></p>
+    <br>
+    <button class="time btn-primary" type="submit">Show Time</button>
+    <p class="timeAns"></p>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(".date").on("click",()=>{
+            $(".dateAns").text(function(){
+                const date = new Date();
+                
+                const year = date.getFullYear();
+                const day = date.getDate();
+                const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
+                const month = monthNames[date.getMonth()];
+                
+                const finaldate = [year,month,day].reverse().join('/');
+                return finaldate;
+            });
+        })
+        $(".time").on("click",()=>{
+            $(".timeAns").text(()=>{
+               const iso = new Date().toString();
+               return iso;
+            });
+        })
+    </script>
+</body>
+</html>

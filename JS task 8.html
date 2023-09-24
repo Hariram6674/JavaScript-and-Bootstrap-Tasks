@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+        *,
+        *::after,
+        *:before{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        html{
+            font:normal 20px/1.5 sans-serif;
+        }
+        h1{
+            margin: 1rem 2rem;
+        }
+        form{
+            margin: 2em;
+            width: 700px;
+        }
+        .form-box{
+            padding: 0.5em;
+            clear: both;
+            width: 110%;
+            position: relative;
+        }
+        .form-box label{
+            font-size: 1rem;
+            float: left;
+            width: 120px;
+            margin-right: 20px;
+        }
+        .form-box input{
+            font-size: 1rem;
+            width: 500px;
+        }
+        .form-box select{
+            font-size: 1rem;
+            width: 500px;
+            padding: 0.25rem 1rem;
+        }
+        .form-box option{
+            font-size: 1rem;
+            width: 300px;
+            padding: 0.25rem 1rem;
+        }
+        .form-box input[type="checkbox"]{
+            font-size: 1rem;
+            width:20px !important;
+        }
+        .form-box button{
+            font-size: 1rem;
+            border: 2px black solid;
+            padding: 0.25rem 2rem;
+            margin-right: 1rem;
+            color: white;
+            background-color: red;
+            cursor: pointer;
+            border-radius:10%;
+        }
+        button:hover{
+            background-color: rgb(251, 87, 87);
+        }
+        select:invalid,select option[value=""] {
+            color: grey;
+        }
+        .container{
+            background: linear-gradient(to bottom, #ffff66 0%, #cc99ff 100%);
+        }
+        p#error{
+            float:right;
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="background-color: #833ab4;">
+    <center><h1>Registration form</h1></center>
+    
+    <center><form id="form-user" action="#" method="post">
+        <div class="form-box error">
+            <label for="input-first">First Name</label>
+            <input type="text" id="input-first" onkeyup="check1()" onclick="check1()" required />
+            <p id="error" class="first">`</p>
+        </div>
+        <div class="form-box error">
+            <label for="input-last">Last Name</label>
+            <input type="text" id="input-last" required onkeyup="check2()" onclick="check2()"/>
+            <p id="error" class="last"></p>
+        </div>
+        <div class="form-box">
+            <label for="input-email">E-mail</label>
+            <input type="email" id="input-email" required onkeyup="check3()" onclick="check3()"  />
+            <p id="error" class="email"></p>
+        </div>
+        <div class="form-box">
+            <label for="input-pass">Password</label>
+            <input type="password" id="input-pass" required  onkeyup="check4()" onclick="check4()" />
+            <p id="error" class="pass"></p>
+        </div>
+        <div class="form-box">
+            <label for="input-repass">Re-enter Password</label>
+            <input type="password" id="input-repass" required  onkeyup="check5()" onclick="check5()" />
+            <p id="error" class="repass"></p>
+        </div>
+        <div class="form-box">
+            <label for="input-gender">Gender</label>
+            <input type="checkbox" id="input-gender1" />Male <input type="checkbox" id="input-gender2" />Female <br>
+        </div>
+        <div class="form-box">
+            <label for="input-age">Age</label>
+            <input type="number" id="input-age" required  onkeyup="check6()" onclick="check6()" />
+            <p id="error" class="age"></p>
+        </div>
+        <div class="form-box">
+            <label for="input-number">Phone Number</label>
+            <input type="number" id="input-number" required  onkeyup="check7()" onclick="check7()" />
+            <p id="error" class="number"></p>
+        </div>
+        <div class="form-box">
+            <label for="input-address">Address</label>
+            <textarea id="input-address" cols="50" rows="5" onkeyup="check8()" onclick="check8()"></textarea>
+            <p id="error" class="address"></p>
+        </div>
+        <div class="form-box">
+            <label for="input-state">State</label>
+            <input type="text" id="input-state" required  onkeyup="check9()" onclick="check9()" />
+            <p id="error" class="state"></p>
+        </div>
+        <div class="form-box">
+            <label for="input-country">Country</label>
+            <select id="input-country"  required>
+                <option value="" selected disabled hidden>Choose your Country</option>
+                <option value="0">India</option>
+                <option value="1">UAE</option>
+                <option value="2">USA</option>
+                <option value="3">Russia</option>
+                <option value="4">UK</option>
+            </select>
+        </div>
+        <div class="form-box">
+            <label for="input-lang">Gender</label>
+            <input type="checkbox" id="input-lang1" />English <input type="checkbox" id="input-lang2" />Kannada <input type="checkbox" id="input-lang3" />Hindi <input type="checkbox" id="input-lang4" />Telugu<br>
+        </div>
+        <input type="checkbox" id="input-check" value="yes" checked />Hereby I declare all the given details are true
+        <p>Log in to <a href="https://codemithra.com">Ethnus</a> website</p>
+        <div class="form-box">
+            <button id="button-send">Register</button>
+        </div>
+    </form>
+</center>
+</div>
+
+    <script>
+        function check1(){
+            let temp=document.getElementById("input-first").value;
+            if(temp.length == 0){
+                document.querySelector('.first').innerText = "POOR";
+            }
+            else{
+                document.querySelector('.first').innerText = "GOOD";
+            }
+        }
+        function check2(){
+            let temp=document.getElementById("input-last").value;
+            if(temp.length == 0){
+                document.querySelector('.last').innerText = "POOR";
+            }
+            else{
+                document.querySelector('.last').innerText = "GOOD";
+            }
+        }
+        function emailcheck(emailid){
+            const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            let email = emailid.trim();
+            return emailRegex.test(email);
+        }
+        function check3(){
+            let temp=document.getElementById("input-email").value;
+            if(temp.length == 0){
+                document.querySelector('.email').innerText = "POOR";
+            }
+            else{
+                if(emailcheck(temp)){
+                    document.querySelector('.email').innerText = "VALID";
+                }
+                else{
+                    document.querySelector('.email').innerText = "INVALID";
+                }
+            }
+        }
+        function check4(){
+            let temp=document.getElementById("input-pass").value;
+            if(temp.length == 0){
+                document.querySelector('.pass').innerText = "POOR";
+            }
+            else if(temp.length < 5){
+                document.querySelector('.pass').innerText = "WEAK";
+            }
+            else{
+                document.querySelector('.pass').innerText = "STRONG";
+            }
+        }
+        function check5(){
+            let temp1=document.getElementById("input-pass").value;
+            let temp2=document.getElementById("input-repass").value;
+            if(temp1 != temp2 || temp1.length == 0){
+                document.querySelector('.repass').innerText = "POOR OR MISMATCH";
+            }
+            else{
+                document.querySelector('.repass').innerText = "MATCHED";
+            }
+        }
+        function check6(){
+            let temp=document.getElementById("input-age").value;
+            if(temp.length == 0){
+                document.querySelector('.age').innerText = "POOR";
+            }
+            else if(temp < 18){
+                document.querySelector('.age').innerText = "UNDERAGE";
+            }
+            else{
+                document.querySelector('.age').innerText = "PERFECT";
+            }
+        }
+        function check7(){
+            let temp=document.getElementById("input-number").value;
+            if(temp.length == 0){
+                document.querySelector('.number').innerText = "POOR";
+            }
+            else if(temp.length < 10){
+                document.querySelector('.number').innerText = "NOT VALID";
+            }
+            else{
+                document.querySelector('.number').innerText = "VALID";
+            }
+        }
+        function check8(){
+            let temp=document.getElementById("input-address").value;
+            if(temp.length == 0){
+                document.querySelector('.address').innerText = "POOR";
+            }
+            else{
+                document.querySelector('.address').innerText = "GOOD";
+            }
+        }
+        function check9(){
+            let temp=document.getElementById("input-state").value;
+            if(temp.length == 0){
+                document.querySelector('.state').innerText = "POOR";
+            }
+            else{
+                document.querySelector('.state').innerText = "GOOD";
+            }
+        }
+    </script>
+</body>
+</html>

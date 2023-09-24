@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <meta name="viewport" content="width=device-width">
+    <style>
+        *,
+        *::after,
+        *:before{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        html{
+            font:normal 20px/1.5 sans-serif;
+        }
+        h1{
+            margin: 1rem 2rem;
+        }
+        form{
+            margin: 2rem;
+            width: 800px;
+        }
+        .form-box{
+            padding: 1rem;
+            clear: both;
+            width: 100%;
+            position: relative;
+        }
+        .form-box label{
+            font-size: 1rem;
+            float: left;
+            width: 100px;
+            margin-right: 20px;
+        }
+        .form-box input{
+            font-size: 1rem;
+            width: 300px;
+            padding: 0.25rem 1rem;
+        }
+        .form-box select{
+            font-size: 1rem;
+            width: 300px;
+            padding: 0.25rem 1rem;
+        }
+        .form-box option{
+            font-size: 1rem;
+            width: 300px;
+            padding: 0.25rem 1rem;
+        }
+        .form-box input[type="checkbox"]{
+            font-size: 1rem;
+        }
+        .form-box button{
+            font-size: 1rem;
+            border: none;
+            padding: 0.25rem 2rem;
+            margin-right: 1rem;
+            color: white;
+            background-color: cornflowerblue;
+            cursor: pointer;
+        }
+        
+        .error::after{
+            background-color: hsl(10, 60%, 50%);
+            color: papayawhip;
+            font-size: 1rem;
+            line-height: 1.8;
+            width: 350px;
+            padding-left: 1rem;
+            position:absolute;
+            right: 0;
+            content: attr(data-errormsg);
+        }
+    </style>
+</head>
+<body>
+    <h1>Forms</h1>
+    
+    <form id="form-user" action="#" method="post">
+        <div class="form-box error" data-errormsg="">
+            <label for="input-first">Name</label>
+            <input type="text" id="input-first" autofocus placeholder="First Name" tabindex="1"/>
+        </div>
+        <div class="form-box" data-errormsg="">
+            <label for="input-email">E-mail</label>
+            <input type="email" id="input-email" required placeholder="E-mail Address" tabindex="3" />
+        </div>
+        <div class="form-box" data-errormsg="">
+            <label for="input-website">Website</label>
+            <input type="password" id="input-website" required placeholder="URL" tabindex="2" />
+        </div>
+        <div class="form-box" data-errormsg="">
+            <label for="input-message">Message</label>
+            <textarea id="input-message" cols="30" rows="10" placeholder="Type something"></textarea>
+        </div>
+        <div class="form-box">
+            <button id="button-send">Submit</button>
+        </div>
+    </form>
+    
+    <script>
+        const init = function(){
+            document.getElementById('button-send').addEventListener('click', send);
+        }
+        
+        const send = function(ev){
+            ev.preventDefault(); 
+            ev.stopPropagation();
+            let fails = validate();
+            if(fails.length === 0){
+                document.getElementById('form-user').submit();
+            }else{
+                fails.forEach(function(obj){
+                    let field = document.getElementById(obj.input);
+                    field.parentElement.classList.add('error');
+                    field.parentElement.setAttribute('data-errormsg', obj.msg);
+                })
+            }
+        }
+
+        function isUrlValid(str) {
+            const pattern = new RegExp(
+              '^(https?:\\/\\/)?' + 
+                '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + 
+                '((\\d{1,3}\\.){3}\\d{1,3}))' + 
+                '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' +
+                '(\\?[;&a-z\\d%_.~+=-]*)?' + 
+                '(\\#[-a-z\\d_]*)?$',
+              'i'
+            );
+            return pattern.test(str);
+        }
+
+        function emailcheck(emailid){
+            const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            let email = emailid.trim();
+            return emailRegex.test(email);
+        }
+        
+        const validate = function(ev){
+            let failures = [];
+            let first = document.getElementById('input-first');
+            let website = document.getElementById('input-website');
+            let email = document.getElementById('input-email');
+            let message = document.getElementById('input-message');
+            if( first.value === ""){
+                failures.push({input:'input-first', msg:'Name required'})
+            } 
+            if(website.value == ""){
+                failures.push({input:'input-website', msg:'URL required'})
+            }
+            if( !website.value == "" && !isUrlValid(website.value) ){
+                failures.push({input:'input-website', msg:'Wrong URL'})
+            } 
+            if(email.value === ""){
+                failures.push({input:'input-email', msg:'Email required'})
+            }
+            if( !email.value == "" && !emailcheck(email.value)){
+                failures.push({input:'input-email', msg:'Wrong format'})
+            }
+            if( message.value == ""){
+                failures.push({input:'input-message', msg:'This field is required'})
+            }
+            return failures;
+        }
+        
+        
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
