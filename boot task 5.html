@@ -4,26 +4,30 @@
     <title>Contact form with Validation</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-  <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
-<link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'>
+    <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'>
     <link rel="stylesheet" href="styles.css" />
     <style>
       #success_message{
         display: none;
        }
+       select:invalid{
+        color:gray;
+      }
+      option[value=""][disabled] {
+        display: none;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <form class="well form-horizontal" action=" " method="post"  id="contact_form">
   <fieldset>
-  <center><legend>Contact Us Today</legend></center>
+  <center><legend>Contact Us Today!</legend></center>
   <div class="form-group">
     <label class="col-md-4 control-label">First Name</label>
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
     <input  name="first_name" placeholder="First Name" class="form-control"  type="text">
       </div>
     </div>
@@ -32,7 +36,6 @@
     <label class="col-md-4 control-label" >Last Name</label>
       <div class="col-md-4 inputGroupContainer">
       <div class="input-group">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
     <input name="last_name" placeholder="Last Name" class="form-control"  type="text">
       </div>
     </div>
@@ -41,7 +44,6 @@
     <label class="col-md-4 control-label">E-Mail</label>
       <div class="col-md-4 inputGroupContainer">
       <div class="input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
     <input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
       </div>
     </div>
@@ -50,8 +52,7 @@
     <label class="col-md-4 control-label">Phone #</label>
       <div class="col-md-4 inputGroupContainer">
       <div class="input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-    <input name="phone" placeholder="99999 99999" class="form-control" type="text">
+    <input name="phone" placeholder="(845)555-1212" class="form-control" type="text">
       </div>
     </div>
   </div>
@@ -59,7 +60,6 @@
     <label class="col-md-4 control-label">Address</label>
       <div class="col-md-4 inputGroupContainer">
       <div class="input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
     <input name="address" placeholder="Address" class="form-control" type="text">
       </div>
     </div>
@@ -68,7 +68,6 @@
     <label class="col-md-4 control-label">City</label>
       <div class="col-md-4 inputGroupContainer">
       <div class="input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
     <input name="city" placeholder="city" class="form-control"  type="text">
       </div>
     </div>
@@ -77,9 +76,8 @@
     <label class="col-md-4 control-label">State</label>
       <div class="col-md-4 selectContainer">
       <div class="input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
       <select name="state" class="form-control selectpicker" >
-        <option value=" " >Please select your state</option>
+        <option value="" disabled selected>Please select your state</option>
         <option>Alabama</option>
         <option>Alaska</option>
         <option >Arizona</option>
@@ -105,9 +103,6 @@
         <option >Michigan</option>
         <option >Minnesota</option>
         <option>Mississippi</option>
-        <option>Missouri</option>
-        <option>Montana</option>
-        <option>Nebraska</option>
       </select>
     </div>
   </div>
@@ -116,7 +111,6 @@
     <label class="col-md-4 control-label">Zip Code</label>
       <div class="col-md-4 inputGroupContainer">
       <div class="input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
     <input name="zip" placeholder="Zip Code" class="form-control"  type="text">
       </div>
   </div>
@@ -125,31 +119,29 @@
     <label class="col-md-4 control-label">Website or domain name</label>
      <div class="col-md-4 inputGroupContainer">
       <div class="input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
     <input name="website" placeholder="Website or domain name" class="form-control" type="text">
       </div>
     </div>
   </div>
    <div class="form-group">
-    <label class="col-md-4 control-label">Do you have hosting?</label>
-    <div class="col-md-4">
-        <div class="radio">
-            <label>
-                <input type="radio" name="hosting" value="yes" /> Yes
-            </label>
-        </div>
-        <div class="radio">
-            <label>
-                <input type="radio" name="hosting" value="no" /> No
-            </label>
-        </div>
-    </div>
-</div>
+      <label class="col-md-4 control-label">Do you have hosting?</label>
+      <div class="col-md-4">
+          <div class="radio">
+              <label>
+                  <input type="radio" name="hosting" value="yes" /> Yes
+              </label>
+          </div>
+          <div class="radio">
+              <label>
+                  <input type="radio" name="hosting" value="no" /> No
+              </label>
+          </div>
+      </div>
+  </div>
   <div class="form-group">
     <label class="col-md-4 control-label">Project Description</label>
       <div class="col-md-4 inputGroupContainer">
       <div class="input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
             <textarea class="form-control" name="comment" placeholder="Project Description"></textarea>
     </div>
     </div>
@@ -275,7 +267,7 @@
               }
           })
           .on('success.form.bv', function(e) {
-              $('#success_message').slideDown({ opacity: "show" }, "slow") 
+              $('#success_message').slideDown({ opacity: "show" }, "slow")
                   $('#contact_form').data('bootstrapValidator').resetForm();
               e.preventDefault();
               var $form = $(e.target);
